@@ -1,18 +1,20 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const connectDB = require('./config/db');
 
 const app = express();
 
-const host = "localhost";
-const port = 5000;
 
-const buildPath = path.join(__dirname, "build/contracts");
+//Connect Database
+connectDB();//Init
 
-app.get("/upload", (req, res) => {});
+// Init Middleware
+app.use(express.json({ extended: false }));
 
-app.listen(port, host, () => {
-  console.log(`server started at port${port}`);
-});
+app.get('/', (req, res) => res.send('Hello World'));
 
-module.exports = app;
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+
+
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
