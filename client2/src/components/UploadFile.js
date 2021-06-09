@@ -45,12 +45,19 @@ class UploadFiles extends Component {
       isError: false,
       uploading: false,
       privateKey: "",
+      filename: "",
     };
   }
 
   selectFile(event) {
     this.setState({
       selectedFile: event.target.files[0],
+    });
+  }
+
+  setFileName(event) {
+    this.setState({
+      filename: event.target.value,
     });
   }
 
@@ -68,7 +75,7 @@ class UploadFiles extends Component {
     });
 
     UploadService.upload(
-      { file: this.state.selectedFile, key: this.state.privateKey },
+      { file: this.state.selectedFile, key: this.state.privateKey, name: this.state.filename },
       (event) => {
         this.setState({
           progress: Math.round((100 * event.loaded) / event.total),
@@ -98,8 +105,15 @@ class UploadFiles extends Component {
   }
 
   render() {
-    const { selectedFile, progress, message, isError, uploading, privateKey } =
-      this.state;
+    const {
+      selectedFile,
+      progress,
+      message,
+      isError,
+      uploading,
+      privateKey,
+      filename,
+    } = this.state;
     const { classes } = this.props;
     return (
       <div className="mg20">
@@ -116,6 +130,16 @@ class UploadFiles extends Component {
             </Box>
           </Box>
         )}
+        <div className={classes.fields} style={{ width: "100%" }}>
+          <label htmlFor="filename">File Name</label>
+          <input
+            type="text"
+            name="filename"
+            id="filename"
+            value={filename}
+            onChange={this.setFileName}
+          />
+        </div>
         <div className={classes.fields} style={{ width: "100%" }}>
           <label htmlFor="privateKey">Private Key</label>
           <input
