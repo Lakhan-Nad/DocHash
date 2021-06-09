@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const config = require("config");
+const createAccount = require("../src/blockchain/functions/createAccount");
 
 router.post(
   "/",
@@ -27,10 +28,12 @@ router.post(
       if (user) {
         return res.status(400).json({ msg: "User already exists" });
       }
+      const account = await createAccount();
       user = new User({
         name,
         email,
         password,
+        account,
       });
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);

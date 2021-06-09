@@ -2,26 +2,26 @@ require("dotenv").config();
 const Web3 = require("web3");
 const FileContractJSON = require("../../build/contracts/FileContract.json");
 
-const web3 = new Web3("http://localhost:8545");
+const web3 = new Web3("http://localhost:7545");
 web3.eth.getAccounts().then((accounts) => {
   const FileContract = new web3.eth.Contract(
     FileContractJSON.abi,
     process.env.CONTRACT_ADDRESS
   );
   try {
-    // FileContract.methods
-    //   .addFile("a-file-haaadsh", "somefinamknkehj")
-    //   .send({
-    //     from: accounts[0],
-    //     gas: 6721975,
-    //   })
-    //   .then((reciept) => {
-    //     console.log(reciept);
-    //     consoleEvents(reciept);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
+    FileContract.methods
+      .addFile("a-file-2", "dsfggrhth")
+      .send({
+        from: "0x32053360df697F9006D91B75B5E64B47fEDaf9F1",
+        gas: 6721975,
+      })
+      .then((reciept) => {
+        console.log(reciept);
+        consoleEvents(reciept);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
     // FileContract.methods
     //   .requestAccess("a-file-haaadsh")
     //   .send({
