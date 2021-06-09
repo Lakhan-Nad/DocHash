@@ -8,6 +8,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import UploadFile from "../../components/UploadFile";
 import { useHistory } from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
+import Tabs from "../Tabs";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -23,8 +25,14 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   return (
     <React.Fragment>
-      <Box>
-        <Button onClick={() => setOpen(!open)}>Add new File</Button>
+      <Box textAlign="center" width="100%">
+        <Button onClick={() => setOpen(!open)} variant="contained">
+          <AddIcon />
+          Add new File
+        </Button>
+      </Box>
+      <Box width="100%" mt={5}>
+        <Tabs />
       </Box>
       <Dialog open={open}>
         <DialogTitle>Adding a New File to Blockchain</DialogTitle>

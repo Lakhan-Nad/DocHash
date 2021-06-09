@@ -37,6 +37,7 @@ class UploadFiles extends Component {
     this.selectFile = this.selectFile.bind(this);
     this.upload = this.upload.bind(this);
     this.setPrivateKey = this.setPrivateKey.bind(this);
+    this.setFileName = this.setFileName.bind(this);
 
     this.state = {
       selectedFile: undefined,
@@ -101,6 +102,7 @@ class UploadFiles extends Component {
       privateKey: "",
       progress: 0,
       uploading: false,
+      filename: "",
     });
   }
 

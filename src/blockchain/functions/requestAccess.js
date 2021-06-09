@@ -1,7 +1,7 @@
 const FileContract = require("../fileContract");
 
 module.exports = async (from, fileName) => {
-  FileContract.methods
+  return FileContract.methods
     .requestAccess(fileName)
     .send({
       from,
@@ -13,10 +13,12 @@ module.exports = async (from, fileName) => {
         const result = events["RequestAccess"].returnValues[0];
         if (result.user === from && fileName === result.fileName) {
           // successfully access request added
+          return true;
         }
       }
     })
     .catch((error) => {
       console.log(error.message);
+      return false;
     });
 };

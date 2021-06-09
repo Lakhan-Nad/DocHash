@@ -1,7 +1,7 @@
 const FileContract = require("../fileContract");
 
 module.exports = async (from, fileName, user) => {
-  FileContract.methods
+  return FileContract.methods
     .rejectAccess(fileName, user)
     .send({
       from,
@@ -13,10 +13,12 @@ module.exports = async (from, fileName, user) => {
         const result = events["AccessRejected"].returnValues[0];
         if (result.user === user && fileName === result.fileName) {
           // successfully access request rejected
+          return true;
         }
       }
     })
     .catch((error) => {
       console.log(error.message);
+      return false;
     });
 };

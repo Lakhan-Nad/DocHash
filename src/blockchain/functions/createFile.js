@@ -1,7 +1,7 @@
 const FileContract = require("../fileContract");
 
 module.exports = async (from, fileName, ipfsHash) => {
-  FileContract.methods
+  return FileContract.methods
     .addFile(fileName, ipfsHash)
     .send({
       from,
@@ -13,10 +13,12 @@ module.exports = async (from, fileName, ipfsHash) => {
         const result = events["FileAdded"].returnValues[0];
         if (result.user === from && fileName === result.fileName) {
           // successfully added
+          return true;
         }
       }
     })
     .catch((error) => {
       console.log(error.message);
+      return false;
     });
 };

@@ -1,9 +1,8 @@
-const IPFS = require("ipfs-http-client");
+const ipfsAPI = require("ipfs-api");
 
-const ipfs = IPFS.create({
-  host: "ipfs.infura.io",
-  port: 5001,
+const ipfs = ipfsAPI("ipfs.infura.io", 5001, {
   protocol: "https",
 });
 
-module.exports = ipfs;
+module.exports.IPFS = ipfs;
+module.exports.getIpfsURL = (fileHash) => `https://ipfs.io/ipfs/${fileHash}`;

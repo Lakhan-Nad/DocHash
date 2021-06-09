@@ -34,12 +34,14 @@ contract FileContract {
             "Owner can't request his own file"
         );
         if (granted(fileName, msg.sender)) {
+            emit AlreadyGranted(msg.sender, fileName);
             return (false);
         }
         uint256 i = 0;
         uint256 len = requests[fileName].length;
         for (; i != len; i++) {
             if (requests[fileName][i] == msg.sender) {
+                emit AlreadyRequested(msg.sender, fileName);
                 return (false);
             }
         }
@@ -61,6 +63,7 @@ contract FileContract {
         );
         require(user != msg.sender, "Owner can't request access");
         if (granted(fileName, user)) {
+            emit AlreadyGranted(user, fileName);
             return (false);
         }
         uint256 i = 0;
@@ -74,6 +77,7 @@ contract FileContract {
                 return (true);
             }
         }
+        emit NoSuchAccessRequest(user, fileName);
         return (false);
     }
 
@@ -99,6 +103,7 @@ contract FileContract {
                 return (true);
             }
         }
+        emit NoSuchAccessRequest(user, fileName);
         return (false);
     }
 
@@ -124,6 +129,7 @@ contract FileContract {
                 return (true);
             }
         }
+        emit NoSuchAccessGranted(user, fileName);
         return (false);
     }
 
@@ -206,4 +212,10 @@ contract FileContract {
         );
         return (files[fileName].fileName, files[fileName].ipfsHash);
     }
+
+    event AlreadyGranted(address user, string fileName);
+    event AlreadyRejected(address user, string fileName);
+    event AlreadyRequested(address user, string fileName);
+    event NoSuchAccessRequest(address user, string fileName);
+    event NoSuchAccessGranted(address user, string fileName);
 }

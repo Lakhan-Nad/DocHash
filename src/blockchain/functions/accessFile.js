@@ -1,7 +1,7 @@
 const FileContract = require("../fileContract");
 
 module.exports = async (from, fileName) => {
-  FileContract.methods
+ return FileContract.methods
     .getFileData(fileName)
     .call({
       from,
@@ -10,9 +10,11 @@ module.exports = async (from, fileName) => {
       if (data["0"] === fileName) {
         // success
         console.log(data);
+        return data;
       }
     })
     .catch((error) => {
       console.log(error.message);
+      return false;
     });
 };

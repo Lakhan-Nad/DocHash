@@ -9,19 +9,19 @@ web3.eth.getAccounts().then((accounts) => {
     process.env.CONTRACT_ADDRESS
   );
   try {
-    FileContract.methods
-      .addFile("a-file-2", "dsfggrhth")
-      .send({
-        from: "0x32053360df697F9006D91B75B5E64B47fEDaf9F1",
-        gas: 6721975,
-      })
-      .then((reciept) => {
-        console.log(reciept);
-        consoleEvents(reciept);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    // FileContract.methods
+    //   .addFile("a-file-5", "mkjkdsk")
+    //   .send({
+    //     from: accounts[0],
+    //     gas: 6721975,
+    //   })
+    //   .then((reciept) => {
+    //     console.log(reciept);
+    //     consoleEvents(reciept);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
     // FileContract.methods
     //   .requestAccess("a-file-haaadsh")
     //   .send({
@@ -49,9 +49,9 @@ web3.eth.getAccounts().then((accounts) => {
     //     console.log(error.message);
     //   });
     // FileContract.methods
-    //   .grantAccess("a-file-haaadsh", accounts[1])
+    //   .grantAccess("unique_file", "0x4670B98b97Ff4C1dc85b3CAdC2F63Ee1344Ed689")
     //   .send({
-    //     from: accounts[0],
+    //     from: "0xceD60800DE0d6A9a5E61C938AF679aDA96a9be98",
     //     gas: 6721975,
     //   })
     //   .then((reciept) => {
@@ -62,9 +62,9 @@ web3.eth.getAccounts().then((accounts) => {
     //     console.log(error.message);
     //   });
     // FileContract.methods
-    //   .deleteAccess("a-file-haaadsh", accounts[1])
+    //   .deleteAccess("unique_file", "0x4670B98b97Ff4C1dc85b3CAdC2F63Ee1344Ed689")
     //   .send({
-    //     from: accounts[0],
+    //     from: "0xceD60800DE0d6A9a5E61C938AF679aDA96a9be98",
     //     gas: 6721975,
     //   })
     //   .then((reciept) => {
@@ -75,9 +75,9 @@ web3.eth.getAccounts().then((accounts) => {
     //     console.log(error.message);
     //   });
     // FileContract.methods
-    //   .updateFile("a-file-haaadsh", "nfjsnfjs jbjab")
+    //   .updateFile("unique_file", "kdnkndkfmfamfmb")
     //   .send({
-    //     from: accounts[0],
+    //     from: "0xceD60800DE0d6A9a5E61C938AF679aDA96a9be98",
     //     gas: 6721975,
     //   })
     //   .then((reciept) => {
@@ -88,9 +88,9 @@ web3.eth.getAccounts().then((accounts) => {
     //     console.log(error.message);
     //   });
     // FileContract.methods
-    //   .getFileData("a-file-haaadsh")
+    //   .getFileData("unique_file")
     //   .call({
-    //     from: accounts[0],
+    //     from: "0x4670B98b97Ff4C1dc85b3CAdC2F63Ee1344Ed689",
     //   })
     //   .then((reciept) => {
     //     console.log(reciept);
