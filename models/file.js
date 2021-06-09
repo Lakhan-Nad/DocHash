@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator/check');
-const User = require('../models/User');
+const User = require('./User');
 const ContactSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
-    name: {
+    name:
+    {
+
+    },
+    filename: {
         type: String,
         required: true
     },
-    email: {
+    ipfsHash: {
         type: String,
-        required: true,
+
     },
-    phone: {
+    file: {
         type: String,
-    },
-    type: {
-        type: String,
-        default: 'personal'
+        data: Buffer
     },
     date: {
         type: Date,
@@ -29,4 +30,4 @@ const ContactSchema = mongoose.Schema({
 
 
 
-module.exports = mongoose.model('contact', ContactSchema);
+module.exports = mongoose.model('file', ContactSchema);
