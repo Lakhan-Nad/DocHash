@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const config = require("config");
-const createAccount = require("../src/blockchain/functions/createAccount");
+// const createAccount = require("../src/blockchain/functions/createAccount");
 
 router.post(
   "/",
@@ -22,18 +22,18 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, email, password } = req.body;
+    const { name, email, password, address } = req.body;
+    console.log(name, email, password, address);
     try {
-      let user = await User.findOne({ email: email });
+      let user = await User.findOne({ email: email, account: address });
       if (user) {
         return res.status(400).json({ msg: "User already exists" });
       }
-      const account = await createAccount();
       user = new User({
         name,
         email,
         password,
-        account,
+        account: address,
       });
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
